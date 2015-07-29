@@ -1,0 +1,19 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ft.membership.spoorclient</groupId>
+  <artifactId>client</artifactId>
+  <version>0.1-SNAPSHOT</version>
+
+  <parent>
+    <groupId>com.ft.membership.spoorclient</groupId>
+    <artifactId>spoor-client</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+</project>
