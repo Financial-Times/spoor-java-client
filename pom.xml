@@ -8,6 +8,25 @@
     <module>client</module>
   </modules>
 
+  <scm>
+    <connection>scm:git:ssh:git@github.com:Financial-Times/spoor-java-client.git</connection>
+    <developerConnection>scm:git:ssh:git@github.com:Financial-Times/spoor-java-client.git
+    </developerConnection>
+    <url>https://github.com/Financial-Times/spoor-java-client</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>deployment</id>
+      <url>http://anthill.svc.ft.com:8081/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>deployment</id>
+      <url>http://anthill.svc.ft.com:8081/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
