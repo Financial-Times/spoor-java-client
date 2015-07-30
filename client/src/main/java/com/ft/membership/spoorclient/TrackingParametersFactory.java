@@ -31,7 +31,7 @@ public class TrackingParametersFactory {
                 replaceUriRoot(request.getRequestURI())
         );
 
-        return new TrackingParameters(trackingSystem, trackingContext, trackingDevice, "page", "action???");
+        return new TrackingParameters(trackingSystem, trackingContext, trackingDevice, "page", "view");
     }
 
     private Pattern uriReplaceRegexp = Pattern.compile("https?://.*?(/.*)");
