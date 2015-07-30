@@ -1,5 +1,6 @@
 package com.ft.membership.spoorclient;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Optional;
@@ -47,8 +48,8 @@ public class TrackingParametersFactory {
 
     private Optional<String> getCookieValue(HttpServletRequest request, String cookieKey) {
         return Arrays.stream(request.getCookies())
-            .filter((cookie) -> cookie.getName().equals(cookieKey))
-            .map((cookie) -> cookie.getValue())
+            .filter(cookie -> cookie.getName().equals(cookieKey))
+            .map(Cookie::getValue)
             .findFirst();
     }
 
