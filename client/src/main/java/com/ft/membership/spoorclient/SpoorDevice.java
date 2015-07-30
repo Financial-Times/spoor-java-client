@@ -2,12 +2,12 @@ package com.ft.membership.spoorclient;
 
 import java.util.Optional;
 
-public class TrackingDevice {
+public class SpoorDevice {
     private Optional<String> spoorSession;
     private Optional<String> spoorId;
     private Optional<String> userAgent;
 
-    public TrackingDevice(Optional<String> spoorSession, Optional<String> spoorId, Optional<String> userAgent) {
+    public SpoorDevice(Optional<String> spoorSession, Optional<String> spoorId, Optional<String> userAgent) {
         this.spoorSession = spoorSession;
         this.spoorId = spoorId;
         this.userAgent = userAgent;

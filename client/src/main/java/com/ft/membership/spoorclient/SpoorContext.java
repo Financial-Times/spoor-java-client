@@ -1,12 +1,12 @@
 package com.ft.membership.spoorclient;
 
-public class TrackingContext {
+public class SpoorContext {
     private String id;
     private String rootId;
     private String product;
     private String url;
 
-    public TrackingContext(String id, String rootId, String product, String url) {
+    public SpoorContext(String id, String rootId, String product, String url) {
         this.id = id;
         this.rootId = rootId;
         this.product = product;

@@ -1,13 +1,13 @@
 package com.ft.membership.spoorclient;
 
-public class TrackingParameters {
-    private TrackingSystem system;
-    private TrackingContext context;
-    private TrackingDevice device;
+public class SpoorParameters {
+    private SpoorSystem system;
+    private SpoorContext context;
+    private SpoorDevice device;
     private String category;
     private String action;
 
-    public TrackingParameters(TrackingSystem system, TrackingContext context, TrackingDevice device, String category, String action) {
+    public SpoorParameters(SpoorSystem system, SpoorContext context, SpoorDevice device, String category, String action) {
         this.system = system;
         this.context = context;
         this.device = device;
@@ -15,15 +15,15 @@ public class TrackingParameters {
         this.action = action;
     }
 
-    public TrackingSystem getSystem() {
+    public SpoorSystem getSystem() {
         return system;
     }
 
-    public TrackingContext getContext() {
+    public SpoorContext getContext() {
         return context;
     }
 
-    public TrackingDevice getDevice() {
+    public SpoorDevice getDevice() {
         return device;
     }
 
