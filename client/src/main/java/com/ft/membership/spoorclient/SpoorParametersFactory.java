@@ -7,31 +7,31 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TrackingParametersFactory {
+public class SpoorParametersFactory {
     String apiKey;
     String version = this.getClass().getPackage().getImplementationVersion();
     String appRootUrl;
     String product;
 
 
-    public TrackingParameters fromRequest(HttpServletRequest request, Optional<String> rootId) {
-        TrackingSystem trackingSystem = new TrackingSystem(apiKey, version, "spoor-java-client");
+    public SpoorParameters fromRequest(HttpServletRequest request, Optional<String> rootId) {
+        SpoorSystem trackingSystem = new SpoorSystem(apiKey, version, "spoor-java-client");
 
 
-        TrackingDevice trackingDevice = new TrackingDevice(
+        SpoorDevice trackingDevice = new SpoorDevice(
                 getCookieValue(request, "FTSession"),
                 getCookieValue(request, "spoor-id"),
                 getHeader(request, "User-Agent")
         );
 
-        TrackingContext trackingContext = new TrackingContext(
+        SpoorContext trackingContext = new SpoorContext(
                 UUID.randomUUID().toString(),
                 rootId.orElse(UUID.randomUUID().toString()),
                 product,
                 replaceUriRoot(request.getRequestURI())
         );
 
-        return new TrackingParameters(trackingSystem, trackingContext, trackingDevice, "page", "action???");
+        return new SpoorParameters(trackingSystem, trackingContext, trackingDevice, "page", "action???");
     }
 
     private Pattern uriReplaceRegexp = Pattern.compile("https?://.*?(/.*)");
@@ -56,7 +56,7 @@ public class TrackingParametersFactory {
         return Optional.ofNullable(request.getHeader(headerName));
     }
 
-    public TrackingParametersFactory(String apiKey, String appRootUrl, String product) {
+    public SpoorParametersFactory(String apiKey, String appRootUrl, String product) {
         this.apiKey = apiKey;
         this.appRootUrl = appRootUrl;
         this.product = product;
