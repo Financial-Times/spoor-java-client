@@ -9,9 +9,8 @@
   </modules>
 
   <scm>
-    <connection>scm:git:ssh:git@github.com:Financial-Times/spoor-java-client.git</connection>
-    <developerConnection>scm:git:ssh:git@github.com:Financial-Times/spoor-java-client.git
-    </developerConnection>
+    <connection>scm:git:git@github.com:Financial-Times/spoor-java-client.git</connection>
+    <developerConnection>scm:git:git@github.com:Financial-Times/spoor-java-client.git</developerConnection>
     <url>https://github.com/Financial-Times/spoor-java-client</url>
     <tag>HEAD</tag>
   </scm>
