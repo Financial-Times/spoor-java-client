@@ -47,12 +47,8 @@ public class TrackingParametersFactory {
 
     private Optional<String> getCookieValue(HttpServletRequest request, String cookieKey) {
         return Arrays.stream(request.getCookies())
-            .filter((cookie) -> {
-                return cookie.getName().equals(cookieKey);
-            })
-            .map((cookie) -> {
-                return cookie.getValue();
-            })
+            .filter((cookie) -> cookie.getName().equals(cookieKey))
+            .map((cookie) -> cookie.getValue())
             .findFirst();
     }
 
