@@ -25,7 +25,8 @@ public class SpoorParametersFactoryTest {
                 );
 
         when(request.getHeader("User-Agent")).thenReturn("aUserAgentHeader");
-        when(request.getRequestURI()).thenReturn("http://appserver-not-approot/contextpath?query=param");
+        when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
+        when(request.getQueryString()).thenReturn("query=param");
 
 
         SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory(
@@ -51,7 +52,7 @@ public class SpoorParametersFactoryTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
 
         when(request.getCookies()).thenReturn(new Cookie[]{});
-        when(request.getRequestURI()).thenReturn("http://appserver-not-approot/contextpath?query=param");
+        when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
 
         SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory("", "", "");
 
