@@ -2,12 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ft.membership.spoorclient</groupId>
   <artifactId>spoor-client</artifactId>
-  <version>dev-SNAPSHOT</version>
+  <version>0.21.0</version>
 
   <parent>
     <groupId>com.ft.membership.spoorclient</groupId>
     <artifactId>spoor-client-parent</artifactId>
-    <version>dev-SNAPSHOT</version>
+    <version>0.21.0</version>
   </parent>
 
   <dependencies>
