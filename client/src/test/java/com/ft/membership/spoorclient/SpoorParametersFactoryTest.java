@@ -35,7 +35,7 @@ public class SpoorParametersFactoryTest {
 
         SpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId"));
 
-        assertThat(trackingParameters.getAction()).isEqualTo("action???");
+        assertThat(trackingParameters.getAction()).isEqualTo("view");
         assertThat(trackingParameters.getCategory()).isEqualTo("page");
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
         assertThat(trackingParameters.getContext().getProduct()).isEqualTo("aProduct");
