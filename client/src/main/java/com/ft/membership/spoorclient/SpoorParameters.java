@@ -1,5 +1,6 @@
 package com.ft.membership.spoorclient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -44,7 +45,8 @@ public class SpoorParameters {
         return action;
     }
 
-    public String toJSON() {
+    @JsonIgnore
+    public String getJson() {
 
         try {
             return mapper.writeValueAsString(this);

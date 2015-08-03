@@ -17,7 +17,7 @@ public class SpoorParametersTest {
     public void shouldReturnParametersAsJsonObject() {
         SpoorParameters trackingParameters = new SpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
 
-        String trackingParams = trackingParameters.toJSON();
+        String trackingParams = trackingParameters.getJson();
 
         assertThat(trackingParams).isExactlyInstanceOf(String.class);
         assertThat(trackingParams).isEqualTo("{\"system\":{\"apiKey\":\"\",\"version\":\"\",\"source\":\"\"},\"context\":{\"id\":\"\",\"rootId\":\"\",\"product\":\"\",\"url\":\"\"},\"device\":{\"spoorSession\":null,\"spoorId\":null,\"userAgent\":null},\"category\":\"\",\"action\":\"\"}");
