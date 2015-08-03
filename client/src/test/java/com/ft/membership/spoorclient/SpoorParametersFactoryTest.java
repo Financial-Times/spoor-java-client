@@ -28,7 +28,7 @@ public class SpoorParametersFactoryTest {
         when(request.getQueryString()).thenReturn("query=param");
 
 
-        SpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory(
+        DefaultSpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory(
                 "anApiKey",
                 "https://approot.com",
                 "aProduct");
@@ -53,7 +53,7 @@ public class SpoorParametersFactoryTest {
         when(request.getCookies()).thenReturn(new Cookie[]{});
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
 
-        SpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory("", "", "");
+        DefaultSpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory("", "", "");
 
         SpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.empty());
 
