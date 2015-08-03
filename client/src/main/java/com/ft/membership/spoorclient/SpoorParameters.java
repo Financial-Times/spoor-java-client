@@ -44,7 +44,7 @@ public class SpoorParameters {
         return action;
     }
 
-    public String toJSON() {
+    public String getJson() {
 
         try {
             return mapper.writeValueAsString(this);
