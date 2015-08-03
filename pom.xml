@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ft.membership.spoorclient</groupId>
   <artifactId>spoor-client-parent</artifactId>
-  <version>0.22.0</version>
+  <version>dev-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
     <module>client</module>
@@ -12,7 +12,7 @@
     <connection>scm:git:git@github.com:Financial-Times/spoor-java-client.git</connection>
     <developerConnection>scm:git:git@github.com:Financial-Times/spoor-java-client.git</developerConnection>
     <url>https://github.com/Financial-Times/spoor-java-client</url>
-    <tag>spoor-client-parent-0.22.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
