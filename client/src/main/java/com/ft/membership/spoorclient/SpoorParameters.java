@@ -84,8 +84,12 @@ public class SpoorParameters {
     }
 
     public static SpoorParameters fromJsonString(String json) {
+        return fromJsonString(json, SpoorParameters.class);
+    }
+
+    public static <T extends SpoorParameters> T fromJsonString(String json, Class<T> clazz) {
         try {
-            return mapper.readValue(json, SpoorParameters.class);
+            return mapper.readValue(json, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
