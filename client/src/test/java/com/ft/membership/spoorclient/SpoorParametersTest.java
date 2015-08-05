@@ -20,6 +20,15 @@ public class SpoorParametersTest {
         String trackingParams = trackingParameters.getJson();
 
         assertThat(trackingParams).isExactlyInstanceOf(String.class);
-        assertThat(trackingParams).isEqualTo("{\"system\":{\"apiKey\":\"\",\"version\":\"\",\"source\":\"\"},\"context\":{\"id\":\"\",\"rootId\":\"\",\"product\":\"\",\"url\":\"\"},\"device\":{\"spoorSession\":null,\"spoorId\":null,\"userAgent\":null},\"category\":\"\",\"action\":\"\"}");
+        assertThat(trackingParams).isEqualTo("{\"system\":{\"version\":\"\",\"source\":\"\",\"api_key\":\"\"},\"context\":{\"id\":\"\",\"product\":\"\",\"url\":\"\",\"root_id\":\"\"},\"device\":{\"spoor_session\":null,\"spoor_id\":null,\"user_agent\":null},\"category\":\"\",\"action\":\"\"}");
+    }
+
+    @Test
+    public void shouldParseJson() {
+        SpoorParameters trackingParameters = new SpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
+
+        SpoorParameters parsedParameters = SpoorParameters.fromJsonString(trackingParameters.getJson());
+
+        assertThat(parsedParameters).isEqualToComparingFieldByField(trackingParameters);
     }
 }

@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.ft.membership.spoorclient</groupId>
     <artifactId>spoor-client-parent</artifactId>
-    <version>0.22.0</version>
+    <version>dev-SNAPSHOT</version>
   </parent>
 
   <dependencies>
