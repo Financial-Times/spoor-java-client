@@ -27,13 +27,14 @@ public class SpoorParametersFactoryTest {
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
         when(request.getQueryString()).thenReturn("query=param");
 
-
-        DefaultSpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory(
+        SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory(
                 "anApiKey",
                 "https://approot.com",
                 "aProduct");
 
-        SpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId"));
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters();
+
+        trackingParametersFactory.fromRequest(trackingParameters, request, Optional.of("aRootId"));
 
         assertThat(trackingParameters.getAction()).isEqualTo("view");
         assertThat(trackingParameters.getCategory()).isEqualTo("page");
@@ -53,15 +54,16 @@ public class SpoorParametersFactoryTest {
         when(request.getCookies()).thenReturn(new Cookie[]{});
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
 
-        DefaultSpoorParametersFactory trackingParametersFactory = new DefaultSpoorParametersFactory("", "", "");
+        SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory("", "", "");
 
-        SpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.empty());
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters();
+
+        trackingParametersFactory.fromRequest(trackingParameters, request, Optional.empty());
 
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
         assertThat(trackingParameters.getContext().getRootId()).isNotEmpty();
         assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getSpoorSession()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(Optional.empty());
-
     }
 }

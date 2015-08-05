@@ -5,23 +5,28 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.io.IOException;
 
-public class SpoorParameters {
-    private SpoorSystem system;
-    private SpoorContext context;
-    private SpoorDevice device;
+public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextType extends SpoorContext, SpoorDeviceType extends SpoorDevice> {
+    private SpoorSystemType system;
+    private SpoorContextType context;
+    private SpoorDeviceType device;
     private String category;
     private String action;
     static private ObjectMapper mapper = new ObjectMapper();
+
+
 
     static {
         mapper.registerModule(new Jdk8Module());
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public SpoorParameters(SpoorSystem system, SpoorContext context, SpoorDevice device, String category, String action) {
+    public SpoorParameters(SpoorSystemType system, SpoorContextType context, SpoorDeviceType device, String category, String action) {
         this.system = system;
         this.context = context;
         this.device = device;
@@ -32,15 +37,15 @@ public class SpoorParameters {
     public SpoorParameters() {
     }
 
-    public SpoorSystem getSystem() {
+    public SpoorSystemType getSystem() {
         return system;
     }
 
-    public SpoorContext getContext() {
+    public SpoorContextType getContext() {
         return context;
     }
 
-    public SpoorDevice getDevice() {
+    public SpoorDeviceType getDevice() {
         return device;
     }
 
@@ -52,15 +57,15 @@ public class SpoorParameters {
         return action;
     }
 
-    public void setSystem(SpoorSystem system) {
+    public void setSystem(SpoorSystemType system) {
         this.system = system;
     }
 
-    public void setContext(SpoorContext context) {
+    public void setContext(SpoorContextType context) {
         this.context = context;
     }
 
-    public void setDevice(SpoorDevice device) {
+    public void setDevice(SpoorDeviceType device) {
         this.device = device;
     }
 
@@ -83,10 +88,6 @@ public class SpoorParameters {
         }
     }
 
-    public static SpoorParameters fromJsonString(String json) {
-        return fromJsonString(json, SpoorParameters.class);
-    }
-
     public static <T extends SpoorParameters> T fromJsonString(String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, clazz);
@@ -97,30 +98,17 @@ public class SpoorParameters {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpoorParameters that = (SpoorParameters) o;
-        return java.util.Objects.equals(system, that.system) &&
-                java.util.Objects.equals(context, that.context) &&
-                java.util.Objects.equals(device, that.device) &&
-                java.util.Objects.equals(category, that.category) &&
-                java.util.Objects.equals(action, that.action);
+        return new EqualsBuilder().reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(system, context, device, category, action);
+        return new HashCodeBuilder().reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "SpoorParameters{" +
-                "system=" + system +
-                ", context=" + context +
-                ", device=" + device +
-                ", category='" + category + '\'' +
-                ", action='" + action + '\'' +
-                '}';
+        return new ReflectionToStringBuilder(this).toString();
     }
 }
 

@@ -1,6 +1,9 @@
 package com.ft.membership.spoorclient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -48,25 +51,17 @@ public class SpoorDevice {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpoorDevice that = (SpoorDevice) o;
-        return Objects.equals(spoorSession, that.spoorSession) &&
-                Objects.equals(spoorId, that.spoorId) &&
-                Objects.equals(userAgent, that.userAgent);
+        return new EqualsBuilder().reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(spoorSession, spoorId, userAgent);
+        return new HashCodeBuilder().reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "SpoorDevice{" +
-                "spoorSession=" + spoorSession +
-                ", spoorId=" + spoorId +
-                ", userAgent=" + userAgent +
-                '}';
+        return new ReflectionToStringBuilder(this).toString();
     }
+
 }

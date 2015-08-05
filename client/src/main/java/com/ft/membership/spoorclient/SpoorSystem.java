@@ -1,6 +1,9 @@
 package com.ft.membership.spoorclient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.Objects;
 
@@ -45,25 +48,16 @@ public class SpoorSystem {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpoorSystem that = (SpoorSystem) o;
-        return Objects.equals(apiKey, that.apiKey) &&
-                Objects.equals(version, that.version) &&
-                Objects.equals(source, that.source);
+        return new EqualsBuilder().reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(apiKey, version, source);
+        return new HashCodeBuilder().reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "SpoorSystem{" +
-                "apiKey='" + apiKey + '\'' +
-                ", version='" + version + '\'' +
-                ", source='" + source + '\'' +
-                '}';
+        return new ReflectionToStringBuilder(this).toString();
     }
 }

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class SpoorParametersTest {
     @Test
     public void shouldReturnParametersAsJsonObject() {
-        SpoorParameters trackingParameters = new SpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
 
         String trackingParams = trackingParameters.getJson();
 
@@ -25,9 +25,9 @@ public class SpoorParametersTest {
 
     @Test
     public void shouldParseJson() {
-        SpoorParameters trackingParameters = new SpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("", "", ""), new SpoorContext("", "", "", ""), new SpoorDevice(Optional.empty(), Optional.empty(), Optional.empty()), "", "");
 
-        SpoorParameters parsedParameters = SpoorParameters.fromJsonString(trackingParameters.getJson());
+        DefaultSpoorParameters parsedParameters = SpoorParameters.fromJsonString(trackingParameters.getJson(), DefaultSpoorParameters.class);
 
         assertThat(parsedParameters).isEqualToComparingFieldByField(trackingParameters);
     }
