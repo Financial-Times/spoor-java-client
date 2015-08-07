@@ -11,10 +11,11 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.io.IOException;
 
-public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextType extends SpoorContext, SpoorDeviceType extends SpoorDevice> {
+public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextType extends SpoorContext, SpoorDeviceType extends SpoorDevice, SpoorUserType extends SpoorUser> {
     private SpoorSystemType system;
     private SpoorContextType context;
     private SpoorDeviceType device;
+    private SpoorUserType user;
     private String category;
     private String action;
     static private ObjectMapper mapper = new ObjectMapper();
@@ -26,10 +27,11 @@ public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextTy
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public SpoorParameters(SpoorSystemType system, SpoorContextType context, SpoorDeviceType device, String category, String action) {
+    public SpoorParameters(SpoorSystemType system, SpoorContextType context, SpoorDeviceType device, SpoorUserType user, String category, String action) {
         this.system = system;
         this.context = context;
         this.device = device;
+        this.user = user;
         this.category = category;
         this.action = action;
     }
@@ -75,6 +77,14 @@ public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextTy
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public SpoorUserType getUser() {
+        return user;
+    }
+
+    public void setUser(SpoorUserType user) {
+        this.user = user;
     }
 
     @JsonIgnore

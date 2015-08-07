@@ -13,12 +13,13 @@ public abstract class SpoorParametersBuilder<
         CustomSpoorSystem extends SpoorSystem,
         CustomSpoorContext extends SpoorContext,
         CustomSpoorDevice extends SpoorDevice,
-        CustomSpoorParameters extends SpoorParameters<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice>
+        CustomSpoorUser extends SpoorUser,
+        CustomSpoorParameters extends SpoorParameters<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, SpoorUser>
         >
 {
-    private CustomSpoorParameters instance = createParameters();
+    protected CustomSpoorParameters instance = createParameters();
 
-    abstract CustomSpoorParameters createParameters();
+    protected abstract CustomSpoorParameters createParameters();
 
     String apiKey;
     String version = this.getClass().getPackage().getImplementationVersion();
@@ -40,8 +41,8 @@ public abstract class SpoorParametersBuilder<
 
     protected void buildSpoorSystem(SpoorSystem system) {
         system.setApiKey(apiKey);
-        system.setVersion(version);
-        system.setApiKey("spoor-java-client");
+        system.setVersion("1.0.0");
+        system.setSource("spoor-java-client");
     }
 
     private Pattern uriReplaceRegexp = Pattern.compile("https?://.*?(/.*)");
@@ -82,11 +83,23 @@ public abstract class SpoorParametersBuilder<
         }
     }
 
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> pageView() {
+        instance.setCategory("page");
+        instance.setAction("view");
+        return this;
+    }
+
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> event(String action, String category) {
+        instance.setCategory(category);
+        instance.setAction(action);
+        return this;
+    }
+
     public CustomSpoorParameters build() {
         return instance;
     }
 
-    SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorParameters> fromRequest(HttpServletRequest request, Optional<String> rootId) {
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> fromRequest(HttpServletRequest request, Optional<String> rootId) {
         buildSpoorSystem(instance.getSystem());
         buildSpoorContextFromRequest(instance.getContext(), request, rootId);
         buildSpoorDeviceFromRequest(instance.getDevice(), request);

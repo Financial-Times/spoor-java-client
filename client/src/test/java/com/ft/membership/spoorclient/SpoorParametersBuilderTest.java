@@ -31,7 +31,7 @@ public class SpoorParametersBuilderTest {
                 "anApiKey",
                 "https://approot.com",
                 "aProduct");
-        SpoorParameters<SpoorSystem, SpoorContext, SpoorDevice> trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
 
         assertThat(trackingParameters.getAction()).isEqualTo("view");
         assertThat(trackingParameters.getCategory()).isEqualTo("page");
@@ -56,12 +56,38 @@ public class SpoorParametersBuilderTest {
                 "https://approot.com",
                 "aProduct");
 
-        SpoorParameters<SpoorSystem, SpoorContext, SpoorDevice> trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
 
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
         assertThat(trackingParameters.getContext().getRootId()).isNotEmpty();
         assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getSpoorSession()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    public void buildPageView() {
+        DefaultSpoorParametersBuilder trackingParametersFactory = new DefaultSpoorParametersBuilder(
+                "anApiKey",
+                "https://approot.com",
+                "aProduct");
+
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.pageView().build();
+
+        assertThat(trackingParameters.getAction()).isEqualTo("view");
+        assertThat(trackingParameters.getCategory()).isEqualTo("page");
+    }
+
+    @Test
+    public void buildEvent() {
+        DefaultSpoorParametersBuilder trackingParametersFactory = new DefaultSpoorParametersBuilder(
+                "anApiKey",
+                "https://approot.com",
+                "aProduct");
+
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.event("foo", "blah").build();
+
+        assertThat(trackingParameters.getAction()).isEqualTo("foo");
+        assertThat(trackingParameters.getCategory()).isEqualTo("blah");
     }
 }
