@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpoorParametersFactoryTest {
+public class SpoorParametersBuilderTest {
     @Test
     public void shouldParseParametersFromRequest() {
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -27,14 +27,11 @@ public class SpoorParametersFactoryTest {
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
         when(request.getQueryString()).thenReturn("query=param");
 
-        SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory(
+        DefaultSpoorParametersBuilder trackingParametersFactory = new DefaultSpoorParametersBuilder(
                 "anApiKey",
                 "https://approot.com",
                 "aProduct");
-
-        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters();
-
-        trackingParametersFactory.fromRequest(trackingParameters, request, Optional.of("aRootId"));
+        SpoorParameters<SpoorSystem, SpoorContext, SpoorDevice> trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
 
         assertThat(trackingParameters.getAction()).isEqualTo("view");
         assertThat(trackingParameters.getCategory()).isEqualTo("page");
@@ -54,11 +51,12 @@ public class SpoorParametersFactoryTest {
         when(request.getCookies()).thenReturn(new Cookie[]{});
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://appserver-not-approot/contextpath"));
 
-        SpoorParametersFactory trackingParametersFactory = new SpoorParametersFactory("", "", "");
+        DefaultSpoorParametersBuilder trackingParametersFactory = new DefaultSpoorParametersBuilder(
+                "anApiKey",
+                "https://approot.com",
+                "aProduct");
 
-        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters();
-
-        trackingParametersFactory.fromRequest(trackingParameters, request, Optional.empty());
+        SpoorParameters<SpoorSystem, SpoorContext, SpoorDevice> trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
 
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
         assertThat(trackingParameters.getContext().getRootId()).isNotEmpty();
