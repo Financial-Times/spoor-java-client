@@ -34,7 +34,7 @@ public abstract class SpoorParametersBuilder<
     }
 
     protected void buildSpoorDeviceFromRequest(SpoorDevice device, HttpServletRequest request) {
-        device.setSpoorSession(getCookieValue(request, "FTSession"));
+        device.setSpoorSession(getCookieValue(request, "spoor-session"));
         device.setSpoorId(getCookieValue(request, "spoor-id"));
         device.setUserAgent(getHeader(request, "User-Agent"));
     }
@@ -43,6 +43,9 @@ public abstract class SpoorParametersBuilder<
         system.setApiKey(apiKey);
         system.setVersion("1.0.0");
         system.setSource("spoor-java-client");
+    }
+    protected void buildSpoorUserFromRequest(SpoorUser user, HttpServletRequest request) {
+        user.setFtSession(getCookieValue(request, "FTSession"));
     }
 
     private Pattern uriReplaceRegexp = Pattern.compile("https?://.*?(/.*)");
@@ -89,7 +92,7 @@ public abstract class SpoorParametersBuilder<
         return this;
     }
 
-    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> user( String sessionId, String passportId) {
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> user( Optional<String> sessionId, String passportId) {
         instance.getUser().setFtSession(sessionId);
         instance.getUser().setPassportId(passportId);
         return this;
@@ -109,6 +112,7 @@ public abstract class SpoorParametersBuilder<
         buildSpoorSystem(instance.getSystem());
         buildSpoorContextFromRequest(instance.getContext(), request, rootId);
         buildSpoorDeviceFromRequest(instance.getDevice(), request);
+        buildSpoorUserFromRequest(instance.getUser(), request);
         instance.setAction("view");
         instance.setCategory("page");
         return this;

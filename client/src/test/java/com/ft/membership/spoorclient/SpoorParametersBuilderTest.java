@@ -40,7 +40,7 @@ public class SpoorParametersBuilderTest {
         assertThat(trackingParameters.getContext().getRootId()).isEqualTo("aRootId");
         assertThat(trackingParameters.getContext().getUrl()).isEqualTo("https://approot.com/contextpath?query=param");
         assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(Optional.of("aSpoorIdCookie"));
-        assertThat(trackingParameters.getDevice().getSpoorSession()).isEqualTo(Optional.of("aFTSessionCookie"));
+        assertThat(trackingParameters.getUser().getFtSession()).isEqualTo(Optional.of("aFTSessionCookie"));
         assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(Optional.of("aUserAgentHeader"));
     }
 
