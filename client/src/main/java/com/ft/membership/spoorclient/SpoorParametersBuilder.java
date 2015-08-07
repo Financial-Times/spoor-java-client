@@ -14,7 +14,7 @@ public abstract class SpoorParametersBuilder<
         CustomSpoorContext extends SpoorContext,
         CustomSpoorDevice extends SpoorDevice,
         CustomSpoorUser extends SpoorUser,
-        CustomSpoorParameters extends SpoorParameters<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, SpoorUser>
+        CustomSpoorParameters extends SpoorParameters<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser>
         >
 {
     protected CustomSpoorParameters instance = createParameters();
@@ -86,6 +86,12 @@ public abstract class SpoorParametersBuilder<
     public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> pageView() {
         instance.setCategory("page");
         instance.setAction("view");
+        return this;
+    }
+
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> user( String sessionId, String passportId) {
+        instance.getUser().setFtSession(sessionId);
+        instance.getUser().setPassportId(passportId);
         return this;
     }
 
