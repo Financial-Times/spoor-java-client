@@ -28,9 +28,11 @@ public class SpoorClient {
     }
 
     public CompletableFuture<Optional<String>> postTracking(SpoorParameters spoorParameters) {
-        AsyncHttpClient.BoundRequestBuilder boundRequestBuilder = httpClient.preparePost(spoorApiRoot + "/px.gif");
+        return postTracking(spoorParameters, UUID.randomUUID().toString());
+    }
 
-        String spoorTicket = UUID.randomUUID().toString();
+    public CompletableFuture<Optional<String>> postTracking(SpoorParameters spoorParameters, String spoorTicket) {
+        AsyncHttpClient.BoundRequestBuilder boundRequestBuilder = httpClient.preparePost(spoorApiRoot + "/px.gif");
 
         boundRequestBuilder.setBody(spoorParameters.getJson());
         boundRequestBuilder.setHeader("Content-Type", "application/json");
