@@ -17,6 +17,6 @@ public class SpoorClientTest {
 
     @Test
     public void testClient() throws ExecutionException, InterruptedException {
-        assertThat(client.postTracking(new SpoorParameters()).get()).isTrue();
+        assertThat(client.postTracking(new SpoorParameters()).get().isPresent()).isTrue();
     }
 }

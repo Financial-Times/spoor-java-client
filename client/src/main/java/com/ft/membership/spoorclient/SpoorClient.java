@@ -6,8 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+
+import static java.util.Optional.of;
+import static java.util.Optional.empty;
 
 public class SpoorClient {
     private AsyncHttpClient httpClient;
@@ -22,11 +27,14 @@ public class SpoorClient {
         this.executor = executor;
     }
 
-    public CompletableFuture<Boolean> postTracking(SpoorParameters spoorParameters) {
+    public CompletableFuture<Optional<String>> postTracking(SpoorParameters spoorParameters) {
         AsyncHttpClient.BoundRequestBuilder boundRequestBuilder = httpClient.preparePost(spoorApiRoot + "/px.gif");
+
+        String spoorTicket = UUID.randomUUID().toString();
 
         boundRequestBuilder.setBody(spoorParameters.getJson());
         boundRequestBuilder.setHeader("Content-Type", "application/json");
+        boundRequestBuilder.setHeader("spoor-ticket", spoorTicket);
 
         CompletableFutureHandler completableFutureHandler = new CompletableFutureHandler();
         boundRequestBuilder.execute(completableFutureHandler);
@@ -43,9 +51,10 @@ public class SpoorClient {
                         //do nothing
                     }
                     log.error("Call to spoor api failed status was:" + statusCode + " response was: " + responseBody);
+                    return empty();
+                } else {
+                    return of(spoorTicket);
                 }
-
-                return success;
             },
             this.executor
         );
