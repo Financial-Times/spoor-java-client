@@ -27,7 +27,7 @@ public class SpoorParameters<SpoorSystemType extends SpoorSystem, SpoorContextTy
     static {
         mapper.registerModule(new Jdk8Module());
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
     }
 
     public SpoorParameters(SpoorSystemType system, SpoorContextType context, SpoorDeviceType device, SpoorUserType user, String category, String action) {
