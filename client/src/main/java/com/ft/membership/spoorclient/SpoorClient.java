@@ -26,7 +26,7 @@ public class SpoorClient {
         AsyncHttpClient.BoundRequestBuilder boundRequestBuilder = httpClient.preparePost(spoorApiRoot + "/px.gif");
 
         boundRequestBuilder.setBody(spoorParameters.getJson());
-        boundRequestBuilder.setHeader("ContentType", "application/json");
+        boundRequestBuilder.setHeader("Content-Type", "application/json");
 
         CompletableFutureHandler completableFutureHandler = new CompletableFutureHandler();
         boundRequestBuilder.execute(completableFutureHandler);
