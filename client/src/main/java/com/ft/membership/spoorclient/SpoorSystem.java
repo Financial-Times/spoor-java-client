@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public class SpoorSystem {
     @JsonProperty("api_key")
-    private String apiKey;
-    private String version;
-    private String source;
+    private String apiKey = null;
+    private String version = null;
+    private String source = null;
 
     public SpoorSystem(String apiKey, String version, String source) {
         this.apiKey = apiKey;

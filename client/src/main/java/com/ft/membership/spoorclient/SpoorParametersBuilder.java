@@ -9,6 +9,8 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Optional.empty;
+
 public abstract class SpoorParametersBuilder<
         CustomSpoorSystem extends SpoorSystem,
         CustomSpoorContext extends SpoorContext,
@@ -28,7 +30,7 @@ public abstract class SpoorParametersBuilder<
 
     protected void buildSpoorContextFromRequest(SpoorContext spoorContext, HttpServletRequest request, Optional<String> rootId) {
         spoorContext.setId(UUID.randomUUID().toString());
-        spoorContext.setRootId(rootId.orElse(UUID.randomUUID().toString()));
+        spoorContext.setRootId(empty());
         spoorContext.setProduct(productFactory.apply(request));
         spoorContext.setUrl(replaceUriRoot(getFullURL(request)));
     }
@@ -92,7 +94,7 @@ public abstract class SpoorParametersBuilder<
         return this;
     }
 
-    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> user( Optional<String> sessionId, String passportId) {
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> user( Optional<String> sessionId, Optional<String> passportId) {
         instance.getUser().setFtSession(sessionId);
         instance.getUser().setPassportId(passportId);
         return this;

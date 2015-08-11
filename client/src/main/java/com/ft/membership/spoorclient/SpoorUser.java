@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public class SpoorUser {
     @JsonProperty("ft_session")
-    private Optional<String> ftSession;
+    private Optional<String> ftSession = Optional.empty();
 
     @JsonProperty("passport_id")
-    private String passportId;
+    private Optional<String> passportId = Optional.empty();
 
-    public SpoorUser(Optional<String> ftSession, String passportId) {
+    public SpoorUser(Optional<String> ftSession, Optional<String> passportId) {
         this.ftSession = ftSession;
         this.passportId = passportId;
     }
@@ -31,11 +31,11 @@ public class SpoorUser {
         this.ftSession = ftSession;
     }
 
-    public String getPassportId() {
+    public Optional<String> getPassportId() {
         return passportId;
     }
 
-    public void setPassportId(String passportId) {
+    public void setPassportId(Optional<String> passportId) {
         this.passportId = passportId;
     }
 

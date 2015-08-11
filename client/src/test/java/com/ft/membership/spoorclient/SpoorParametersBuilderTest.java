@@ -6,6 +6,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -31,17 +33,18 @@ public class SpoorParametersBuilderTest {
                 "anApiKey",
                 "https://approot.com",
                 "aProduct");
-        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, of("aRootId")).build();
 
         assertThat(trackingParameters.getAction()).isEqualTo("view");
         assertThat(trackingParameters.getCategory()).isEqualTo("page");
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
         assertThat(trackingParameters.getContext().getProduct()).isEqualTo("aProduct");
-        assertThat(trackingParameters.getContext().getRootId()).isEqualTo("aRootId");
+        assertThat(trackingParameters.getContext().getRootId()).isEqualTo(empty());
+        assertThat(trackingParameters.getContext().getRootId()).isEqualTo(empty());
         assertThat(trackingParameters.getContext().getUrl()).isEqualTo("https://approot.com/contextpath?query=param");
-        assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(Optional.of("aSpoorIdCookie"));
-        assertThat(trackingParameters.getUser().getFtSession()).isEqualTo(Optional.of("aFTSessionCookie"));
-        assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(Optional.of("aUserAgentHeader"));
+        assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(of("aSpoorIdCookie"));
+        assertThat(trackingParameters.getUser().getFtSession()).isEqualTo(of("aFTSessionCookie"));
+        assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(of("aUserAgentHeader"));
     }
 
     @Test
@@ -56,10 +59,9 @@ public class SpoorParametersBuilderTest {
                 "https://approot.com",
                 "aProduct");
 
-        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, Optional.of("aRootId")).build();
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.fromRequest(request, of("aRootId")).build();
 
         assertThat(trackingParameters.getContext().getId()).isNotEmpty();
-        assertThat(trackingParameters.getContext().getRootId()).isNotEmpty();
         assertThat(trackingParameters.getDevice().getSpoorId()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getSpoorSession()).isEqualTo(Optional.empty());
         assertThat(trackingParameters.getDevice().getUserAgent()).isEqualTo(Optional.empty());

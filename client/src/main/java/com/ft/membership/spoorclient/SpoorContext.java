@@ -5,17 +5,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import java.util.Objects;
+import java.util.Optional;
 
 public class SpoorContext {
 
-    private String id;
+    private String id = null;
     @JsonProperty("root_id")
-    private String rootId;
-    private String product;
-    private String url;
+    private Optional<String> rootId = Optional.empty();
+    private String product = null;
+    private String url = null;
 
-    public SpoorContext(String id, String rootId, String product, String url) {
+    public SpoorContext(String id, Optional<String> rootId, String product, String url) {
         this.id = id;
         this.rootId = rootId;
         this.product = product;
@@ -29,7 +29,7 @@ public class SpoorContext {
         return id;
     }
 
-    public String getRootId() {
+    public Optional<String> getRootId() {
         return rootId;
     }
 
@@ -45,7 +45,7 @@ public class SpoorContext {
         this.id = id;
     }
 
-    public void setRootId(String rootId) {
+    public void setRootId(Optional<String> rootId) {
         this.rootId = rootId;
     }
 
