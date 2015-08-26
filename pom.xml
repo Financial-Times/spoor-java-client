@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>client</module>
+    <module>examples</module>
   </modules>
 
   <scm>
