@@ -14,12 +14,20 @@ public class SpoorContext {
     private Optional<String> rootId = Optional.empty();
     private String product = null;
     private String url = null;
+    private Optional<SpoorFunnelStepData> funnel = Optional.empty();
 
-    public SpoorContext(String id, Optional<String> rootId, String product, String url) {
+    public SpoorContext(
+            final String id,
+            final Optional<String> rootId,
+            final String product,
+            final String url,
+            final Optional<SpoorFunnelStepData> funnel) {
+
         this.id = id;
         this.rootId = rootId;
         this.product = product;
         this.url = url;
+        this.funnel = funnel;
     }
 
     public SpoorContext() {
@@ -41,6 +49,8 @@ public class SpoorContext {
         return url;
     }
 
+    public Optional<SpoorFunnelStepData> getFunnel() { return funnel; }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -56,6 +66,8 @@ public class SpoorContext {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public void setFunnel(final Optional<SpoorFunnelStepData> funnel) { this.funnel = funnel; }
 
     @Override
     public boolean equals(Object o) {

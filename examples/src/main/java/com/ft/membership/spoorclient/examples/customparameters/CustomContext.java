@@ -1,14 +1,22 @@
 package com.ft.membership.spoorclient.examples.customparameters;
 
 import com.ft.membership.spoorclient.SpoorContext;
+import com.ft.membership.spoorclient.SpoorFunnelStepData;
 
 import java.util.Optional;
 
 public class CustomContext extends SpoorContext {
     private String customParameter;
 
-    public CustomContext(String id, Optional<String> rootId, String product, String url, String customParameter) {
-        super(id, rootId, product, url);
+    public CustomContext(
+            String id,
+            Optional<String> rootId,
+            String product,
+            String url,
+            Optional<SpoorFunnelStepData> funnel,
+            String customParameter) {
+
+        super(id, rootId, product, url, funnel);
         this.customParameter = customParameter;
     }
 

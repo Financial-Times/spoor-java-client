@@ -92,4 +92,17 @@ public class SpoorParametersBuilderTest {
         assertThat(trackingParameters.getAction()).isEqualTo("foo");
         assertThat(trackingParameters.getCategory()).isEqualTo("blah");
     }
+
+    @Test
+    public void buildFunnel() {
+        DefaultSpoorParametersBuilder trackingParametersFactory = new DefaultSpoorParametersBuilder(
+                "anApiKey",
+                "https://approot.com",
+                "aProduct");
+
+        final SpoorFunnelStepData funnelStepData = new SpoorFunnelStepData("Funnel1", 1, "Step1", 1);
+        DefaultSpoorParameters trackingParameters = trackingParametersFactory.funnel(funnelStepData).build();
+
+        assertThat(trackingParameters.getContext().getFunnel().get()).isEqualTo(funnelStepData);
+    }
 }
