@@ -2,15 +2,14 @@ package com.ft.membership.spoorclient;
 
 import org.junit.Test;
 
-import java.util.Optional;
-
+import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
 public class SpoorParametersTest {
     @Test
     public void shouldReturnParametersAsJsonObject() {
-        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("a", "b", "c"), new SpoorContext("d", of("e"), "f", "g"), new SpoorDevice(of("h"), of("i"), of("j")), new SpoorUser(of("session"), of("passport")), "k", "l");
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("a", "b", "c"), new SpoorContext("d", of("e"), "f", "g", empty()), new SpoorDevice(of("h"), of("i"), of("j")), new SpoorUser(of("session"), of("passport")), "k", "l");
 
         String trackingParams = trackingParameters.getJson();
 
@@ -20,7 +19,7 @@ public class SpoorParametersTest {
 
     @Test
     public void shouldParseJson() {
-        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("x", "x", "x"), new SpoorContext("x", of("x"), "x", "x"), new SpoorDevice(of("x"), of("x"), of("x")), new SpoorUser(of("session"), of("passport")), "x", "x");
+        DefaultSpoorParameters trackingParameters = new DefaultSpoorParameters(new SpoorSystem("x", "x", "x"), new SpoorContext("x", of("x"), "x", "x", empty()), new SpoorDevice(of("x"), of("x"), of("x")), new SpoorUser(of("session"), of("passport")), "x", "x");
 
         DefaultSpoorParameters parsedParameters = SpoorParameters.fromJsonString(trackingParameters.getJson(), DefaultSpoorParameters.class);
 

@@ -106,6 +106,11 @@ public abstract class SpoorParametersBuilder<
         return this;
     }
 
+    public SpoorParametersBuilder<CustomSpoorSystem, CustomSpoorContext, CustomSpoorDevice, CustomSpoorUser, CustomSpoorParameters> funnel(SpoorFunnelStepData funnelStepData) {
+        instance.getContext().setFunnel(Optional.of(funnelStepData));
+        return this;
+    }
+
     public CustomSpoorParameters build() {
         return instance;
     }
